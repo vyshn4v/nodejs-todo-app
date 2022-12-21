@@ -1,0 +1,36 @@
+<a class="btn btn-info w-100 m-1" href="/showcompletedtask" role="button">show completed task</a>
+<form action="/add-todo" method="post">
+  <div class="form-group ">
+    <label for="exampleInputEmail1">add To-do</label>
+    <input type="text" class="form-control" name="to_do" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter the task you need to perform in this week">
+    {{!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{{#each newTodos}}
+<div class="card mt-2">
+  <div class="card-body">
+    {{this.todo}}
+  </div>
+  <div class="card-body">
+    {{this.date}}
+  </div>
+  <div class="card-body">
+    {{#if this.status}}
+    completed
+    {{else}}
+    not completed
+    {{/if}}
+  </div>
+  <div class="column w-100 d-flex justify-content-end">
+    {{#if this.status}}
+    <a class="btn btn-danger w-25  m-1" href="/delete/{{this._id}}" role="button">Delete</a>
+    <a class="btn btn-primary w-25  m-1" href="/not-completed/{{this._id}}" role="button">not complete</a>
+    {{else}}
+    <a class="btn btn-danger w-25  m-1" href="/delete/{{this._id}}" role="button">Delete</a>
+    <a class="btn btn-success w-25  m-1" href="/completed/{{this._id}}" role="button">complete</a>
+    {{/if}}
+  </div>
+</div>
+{{/each}}
